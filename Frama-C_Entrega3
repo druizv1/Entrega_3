@@ -1,0 +1,35 @@
+David Ruìz Vallejo
+Yilmar David Jordan Murillo
+
+Code explanation:
+
+The C function ejemplo is annotated using ACSL (ANSI/ISO C Specification Language) and verified using Frama-C's WP plugin.
+
+Function: void ejemplo(int i, int j)
+This function takes two integers i and j, performs basic arithmetic operations on them, and asserts that their product after modification is equal to 6. The logic follows these steps:
+
+Precondition (requires):
+Requires that both i and j are initially 0:
+requires i ≡ 0 ∧ j ≡ 0;
+
+Postcondition (ensures):
+Ensures that the product of the original values of i and j is 6:
+ensures \old(i) * \old(j) ≡ 6;
+
+Overflow Checks (assert rte):
+The code includes runtime checks to ensure that adding values to i and j doesn't exceed 2147483647 (32-bit signed int max).
+
+Assignments:
+The function does not change any memory:
+assigns \nothing;
+
+Exit Behavior:
+The function always terminates without throwing exceptions:
+exits \false; and terminates \true;
+
+Tools:
+
+-Winfried K. Grassmann, Tremblay, and Winfried Karl Grassmann 1996.
+-Frama-C: Version 26 (Calcium)
+-WP Plugin: For verifying ACSL annotations
+-GCC Compiler: gcc (Ubuntu 11.4.0)
